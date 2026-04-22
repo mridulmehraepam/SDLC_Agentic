@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podcast Episode Planner + Script Assistant</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">🎙️ Podcast Studio</div>
+        <nav>
+          <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+          <button class="nav-btn" data-view="workspace">Episode Workspace</button>
+          <button class="nav-btn" data-view="guests">Guests</button>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <input id="searchInput" class="search" placeholder="Search episodes..." />
+          <button id="newEpisodeBtn" class="btn btn-primary">+ Create Episode</button>
+        </header>
+
+        <section id="dashboardView" class="view active">
+          <div class="section-header">
+            <h1>Episode Planner Dashboard</h1>
+            <p>Plan episodes, manage guests, and move from draft to recording-ready scripts.</p>
+          </div>
+
+          <div class="filters">
+            <select id="statusFilter">
+              <option value="all">All Status</option>
+              <option value="Draft">Draft</option>
+              <option value="Scripted">Scripted</option>
+              <option value="Published">Published</option>
+            </select>
+          </div>
+
+          <div id="episodeList" class="episode-list"></div>
+        </section>
+
+        <section id="workspaceView" class="view">
+          <div id="workspaceEmpty" class="empty-state">
+            <h2>Select an episode</h2>
+            <p>Open an episode from the dashboard or create a new one to start scripting.</p>
+          </div>
+
+          <div id="workspaceContent" class="workspace hidden">
+            <div class="workspace-header">
+              <h2 id="workspaceTitle"></h2>
+              <span id="workspaceStatus" class="status-badge"></span>
+            </div>
+
+            <div class="workspace-grid">
+              <div class="panel">
+                <h3>Episode Metadata</h3>
+                <div class="form-grid">
+                  <label>Title <input id="titleInput" /></label>
+                  <label>Topic <input id="topicInput" /></label>
+                  <label>Duration (mins) <input id="durationInput" type="number" min="1" /></label>
+                  <label>Publish Date <input id="dateInput" type="date" /></label>
+                  <label>Tone
+                    <select id="toneInput">
+                      <option>Professional</option>
+                      <option>Casual</option>
+                      <option>Storytelling</option>
+                    </select>
+                  </label>
+                </div>
+
+                <h3>Guests</h3>
+                <div class="guests-row">
+                  <input id="guestInput" placeholder="Add guest name" />
+                  <button id="addGuestBtn" class="btn">Add Guest</button>
+                </div>
+                <div id="guestTags" class="guest-tags"></div>
+
+                <h3>Outline</h3>
+                <textarea id="outlineInput" rows="8" placeholder="Episode outline..."></textarea>
+
+                <h3>Script</h3>
+                <textarea id="scriptInput" rows="12" placeholder="Generated script will appear here..."></textarea>
+
+                <div class="actions">
+                  <button id="saveDraftBtn" class="btn">Save Draft</button>
+                  <button id="saveVersionBtn" class="btn">Save Version</button>
+                  <button id="markReadyBtn" class="btn btn-primary">Mark Ready for Recording</button>
+                </div>
+              </div>
+
+              <div class="panel">
+                <h3>AI Script Assistant</h3>
+                <textarea id="promptInput" rows="6" placeholder="Describe audience, goals, and style..."></textarea>
+
+                <div class="actions">
+                  <button id="generateOutlineBtn" class="btn">Generate Outline</button>
+                  <button id="generateScriptBtn" class="btn btn-primary">Generate Script</button>
+                  <button id="regenerateBtn" class="btn">Regenerate</button>
+                </div>
+
+                <div id="aiStatus" class="ai-status">No AI action yet.</div>
+
+                <h4>AI Run History</h4>
+                <ul id="aiHistory" class="history-list"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="guestsView" class="view">
+          <div class="section-header">
+            <h1>Guests</h1>
+            <p>Quick view of guests across episodes.</p>
+          </div>
+          <div id="guestsLibrary" class="guests-library"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
