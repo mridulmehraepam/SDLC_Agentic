@@ -16,3 +16,34 @@ Push Hogya
 ## Shared Project Context
 
 All agents read and update [project-context.md](project-context.md) to stay in sync.
+
+## Run Locally
+
+### Backend (FastAPI)
+
+```powershell
+cd c:/autocode/agenticAISession/SDLC_Agentic
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Backend URLs:
+
+- API root health: `http://127.0.0.1:8000/health`
+- Swagger docs: `http://127.0.0.1:8000/docs`
+
+### Frontend (React + Vite)
+
+Prerequisite: Install Node.js (which includes npm), then run:
+
+```powershell
+cd c:/autocode/agenticAISession/SDLC_Agentic
+npm install
+npm run dev
+```
+
+Frontend URL:
+
+- App: `http://127.0.0.1:5173`
